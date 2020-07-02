@@ -135,7 +135,10 @@ if __name__ == '__main__':
         elif is_atari:
             hyperparams = hyperparams_dict['atari']
         else:
-            raise ValueError("Hyperparameters not found for {}-{}".format(args.algo, env_id))
+            if  args.optimize_hyperparameters and args.algo != 'her':
+                hyperparams = {}
+            else:
+                raise ValueError("Hyperparameters not found for {}-{}".format(args.algo, env_id))
 
     if args.hyperparams is not None:
         # Overwrite hyperparams if needed
